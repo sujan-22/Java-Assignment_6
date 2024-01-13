@@ -1,7 +1,10 @@
-//My name: Sujan Rokad, 000882948
-//My partner's name: Jay Patel, 000881881
-//NUmber of total hours I worked: Around 17
-//I think we did same effort in almost everything. (50%-50%)
+/*
+ * Author:                 Sujan Rokad, 000882948
+ *                         Jay Patel, 000881881 (Partner's Name and ID)
+ * Authorship statement:   I, Sujan Rokad, 000882948, and my partner, Jay Patel, 000881881, certify that this material is our original work.
+ *                         No other person's work has been used without due acknowledgment.
+ * Purpose:                Define the abstract Manticore class, a subclass of Monster, with additional functionality for tail venom and healing.
+ */
 
 package Assignment_6;
 
@@ -9,35 +12,66 @@ abstract class Manticore extends Monster {
 
     private int tailVenom;
 
-    // Constructor with parameters to initialize the instance variables of the Manticore object
+    /**
+     * Constructor for the Manticore class with specified parameters.
+     *
+     * @param clanAffiliation The clan affiliation of the manticore.
+     * @param ferocity        The ferocity score of the manticore.
+     * @param defense         The defense score of the manticore.
+     * @param magic           The magic score of the manticore.
+     * @param treasure        The treasure score of the manticore.
+     * @param health          The health score of the manticore.
+     * @param tailVenom       The tail venom score of the manticore.
+     */
     public Manticore(String clanAffiliation, int ferocity, int defense, int magic, int treasure, int health,
                      int tailVenom) {
         super(clanAffiliation, ferocity, defense, magic, treasure, health); // Calls the constructor of the parent class to set common instance variables
-        setTailVenom(tailVenom); //Sets the tail venom instance variable of the Manticore object
+        setTailVenom(tailVenom); // Sets the tail venom instance variable of the Manticore object
     }
 
-    // Default constructor that sets the instance variables of the Manticore object randomly
+    /**
+     * Default constructor for the Manticore class that sets the instance variables of the manticore randomly.
+     *
+     * @param clanAffiliation The clan affiliation of the manticore.
+     */
     public Manticore(String clanAffiliation) {
-        this(clanAffiliation, (int)(Math.random()*21), (int)(Math.random()*21), (int)(Math.random()*21), 0, 15,
-                (int)(Math.random()*11));
+        this(clanAffiliation, (int) (Math.random() * 21), (int) (Math.random() * 21), (int) (Math.random() * 21), 0, 15,
+                (int) (Math.random() * 11));
     }
 
-    // Getter method to get the tail venom instance variable of the Manticore object.
+    /**
+     * Get the tail venom instance variable of the manticore.
+     *
+     * @return The tail venom score of the manticore.
+     */
     public int getTailVenom() {
         return tailVenom;
     }
 
-    // Setter method to set the tail venom instance variable of the Manticore object within a certain range
+    /**
+     * Set the tail venom instance variable of the manticore within a certain range.
+     *
+     * @param tailVenom The tail venom score of the manticore.
+     */
     public void setTailVenom(int tailVenom) {
         this.tailVenom = Math.max(Math.min(tailVenom, 10), 1);
     }
 
-    // Calculates and returns the attack score of the Manticore object.
+    /**
+     * Calculate and return the attack score of the manticore.
+     *
+     * @return The calculated attack score.
+     */
     public double calculateAttackScore() {
         return getFerocity() + getMagic() + tailVenom;
     }
 
-    // Overrides the attack method of the parent class to include the tail venom attack
+    /**
+     * Override the attack method of the parent class to include the tail venom attack.
+     *
+     * @param other The target monster to be attacked.
+     */
+    @Override
     public void attack(Monster other) {
         double attackScore = calculateAttackScore();
         double defenseScore = other.getDefense() + other.getMagic();
@@ -50,7 +84,8 @@ abstract class Manticore extends Monster {
         }
     }
 
-   // An abstract method that needs to be implemented by the child class to define the heal behavior of the Manticore
-   // object
+    /**
+     * An abstract method that needs to be implemented by the child class to define the healing behavior of the manticore.
+     */
     public abstract void heal();
 }
